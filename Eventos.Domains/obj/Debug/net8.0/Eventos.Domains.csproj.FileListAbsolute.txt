@@ -1,0 +1,12 @@
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\bin\Debug\net8.0\Eventos.Domains.deps.json
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\bin\Debug\net8.0\Eventos.Domains.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\bin\Debug\net8.0\Eventos.Domains.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\Eventos.Domains.csproj.AssemblyReference.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\Eventos.Domains.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\Eventos.Domains.AssemblyInfoInputs.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\Eventos.Domains.AssemblyInfo.cs
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\Eventos.Domains.csproj.CoreCompileInputs.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\Eventos.Domains.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\refint\Eventos.Domains.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\Eventos.Domains.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Domains\obj\Debug\net8.0\ref\Eventos.Domains.dll

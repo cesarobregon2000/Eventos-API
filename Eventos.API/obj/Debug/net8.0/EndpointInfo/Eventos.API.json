@@ -1,0 +1,288 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API.EVENTOS",
+    "description": "Administración de APIs para Eventos App",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/Eventos/Crear-Evento": {
+      "post": {
+        "tags": [
+          "Eventos"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEventoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEventoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEventoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Eventos/Listar-Eventos": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Eventos/Listar-Eventos-Id/{EventoId}": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "parameters": [
+          {
+            "name": "EventoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Eventos/Listar-Tipo-Evento": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Eventos/listar-venues": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Eventos/confirmar-pago/{id}": {
+      "put": {
+        "tags": [
+          "Eventos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Eventos/reporte-eventos": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Reservas/Crear-Reserva": {
+      "post": {
+        "tags": [
+          "Reservas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearReservaDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearReservaDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearReservaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Reservas/Listar-Reservas/{EventoId}": {
+      "get": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "EventoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Reservas/cancelar-reserva/{id}": {
+      "post": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CrearEventoDTO": {
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "venue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "capacidaD_MAXIMA": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechA_INICIO": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechA_FIN": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "preciO_ENTRADA": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipO_EVENTO_ID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearReservaDTO": {
+        "type": "object",
+        "properties": {
+          "eventO_ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Ingresa tu JWT token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

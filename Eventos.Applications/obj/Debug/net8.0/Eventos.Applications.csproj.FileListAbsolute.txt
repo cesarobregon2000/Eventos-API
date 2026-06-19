@@ -1,0 +1,15 @@
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\bin\Debug\net8.0\Eventos.Applications.deps.json
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\bin\Debug\net8.0\Eventos.Applications.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\bin\Debug\net8.0\Eventos.Applications.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\bin\Debug\net8.0\Eventos.Domains.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\bin\Debug\net8.0\Eventos.Domains.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos.Applications.csproj.AssemblyReference.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos.Applications.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos.Applications.AssemblyInfoInputs.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos.Applications.AssemblyInfo.cs
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos.Applications.csproj.CoreCompileInputs.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos..A075F89A.Up2Date
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos.Applications.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\refint\Eventos.Applications.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\Eventos.Applications.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Applications\obj\Debug\net8.0\ref\Eventos.Applications.dll

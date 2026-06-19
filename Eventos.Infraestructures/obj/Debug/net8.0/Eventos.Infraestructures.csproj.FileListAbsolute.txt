@@ -1,0 +1,17 @@
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\bin\Debug\net8.0\Eventos.Infraestructures.deps.json
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\bin\Debug\net8.0\Eventos.Infraestructures.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\bin\Debug\net8.0\Eventos.Infraestructures.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\bin\Debug\net8.0\Eventos.Applications.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\bin\Debug\net8.0\Eventos.Domains.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\bin\Debug\net8.0\Eventos.Applications.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\bin\Debug\net8.0\Eventos.Domains.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos.Infraestructures.csproj.AssemblyReference.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos.Infraestructures.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos.Infraestructures.AssemblyInfoInputs.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos.Infraestructures.AssemblyInfo.cs
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos.Infraestructures.csproj.CoreCompileInputs.cache
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos..D2D628F2.Up2Date
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos.Infraestructures.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\refint\Eventos.Infraestructures.dll
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\Eventos.Infraestructures.pdb
+C:\Users\cesar\OneDrive\Documentos\Repo\Eventos.API\Eventos.Infraestructures\obj\Debug\net8.0\ref\Eventos.Infraestructures.dll

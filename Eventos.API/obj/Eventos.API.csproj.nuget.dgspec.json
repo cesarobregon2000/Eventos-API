@@ -1,0 +1,365 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.API\\Eventos.API.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.API\\Eventos.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.API\\Eventos.API.csproj",
+        "projectName": "Eventos.API",
+        "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.API\\Eventos.API.csproj",
+        "packagesPath": "C:\\Users\\cesar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cesar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\Eventos.Applications.csproj": {
+                "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\Eventos.Applications.csproj"
+              },
+              "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Infraestructures\\Eventos.Infraestructures.csproj": {
+                "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Infraestructures\\Eventos.Infraestructures.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Asp.Versioning.Mvc": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "Asp.Versioning.Mvc.ApiExplorer": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[14.1.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.422/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\Eventos.Applications.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\Eventos.Applications.csproj",
+        "projectName": "Eventos.Applications",
+        "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\Eventos.Applications.csproj",
+        "packagesPath": "C:\\Users\\cesar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cesar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\Eventos.Domains.csproj": {
+                "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\Eventos.Domains.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[16.1.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[14.1.0, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.422/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\Eventos.Domains.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\Eventos.Domains.csproj",
+        "projectName": "Eventos.Domains",
+        "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\Eventos.Domains.csproj",
+        "packagesPath": "C:\\Users\\cesar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cesar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "SkiaSharp": {
+              "target": "Package",
+              "version": "[3.119.1, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "ZXing.Net": {
+              "target": "Package",
+              "version": "[0.16.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.422/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Infraestructures\\Eventos.Infraestructures.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Infraestructures\\Eventos.Infraestructures.csproj",
+        "projectName": "Eventos.Infraestructures",
+        "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Infraestructures\\Eventos.Infraestructures.csproj",
+        "packagesPath": "C:\\Users\\cesar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Infraestructures\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cesar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\Eventos.Applications.csproj": {
+                "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Applications\\Eventos.Applications.csproj"
+              },
+              "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\Eventos.Domains.csproj": {
+                "projectPath": "C:\\Users\\cesar\\OneDrive\\Documentos\\Repo\\Eventos.API\\Eventos.Domains\\Eventos.Domains.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.79, )"
+            },
+            "Dapper.SqlBuilder": {
+              "target": "Package",
+              "version": "[2.1.66, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.9, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[8.6.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.422/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

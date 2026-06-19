@@ -1,0 +1,138 @@
+[
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.EventosController",
+    "Method": "ConfirmarPago",
+    "RelativePath": "api/v1/Eventos/confirmar-pago/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.EventosController",
+    "Method": "CrearEventos",
+    "RelativePath": "api/v1/Eventos/Crear-Evento",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Eventos.Domains.DTOs.CrearEventoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.EventosController",
+    "Method": "ObtenerListaEvento",
+    "RelativePath": "api/v1/Eventos/Listar-Eventos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.EventosController",
+    "Method": "ObtenerListaEventoId",
+    "RelativePath": "api/v1/Eventos/Listar-Eventos-Id/{EventoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.EventosController",
+    "Method": "ObtenerListaTipoEvento",
+    "RelativePath": "api/v1/Eventos/Listar-Tipo-Evento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.EventosController",
+    "Method": "Listar",
+    "RelativePath": "api/v1/Eventos/listar-venues",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.EventosController",
+    "Method": "reporte",
+    "RelativePath": "api/v1/Eventos/reporte-eventos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.ReservasController",
+    "Method": "Cancelar",
+    "RelativePath": "api/v1/Reservas/cancelar-reserva/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.ReservasController",
+    "Method": "CrearReserva",
+    "RelativePath": "api/v1/Reservas/Crear-Reserva",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Eventos.Domains.DTOs.CrearReservaDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Eventos.API.Controllers.V1.ReservasController",
+    "Method": "ObtenerListaEvento",
+    "RelativePath": "api/v1/Reservas/Listar-Reservas/{EventoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventoId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
