@@ -18,3 +18,25 @@ Esta API constituye el núcleo del sistema "Eventos Vivos", diseñada para gesti
 2. Configura tu cadena de conexión a SQL Server en `appsettings.json`.
 3. Ejecuta el proyecto desde la terminal:
    `dotnet run`
+
+### 1. Configuración del entorno
+Para ejecutar el proyecto, debes crear o configurar tu archivo `appsettings.json` en la raíz del proyecto. Utiliza la siguiente estructura como plantilla:
+
+```json
+{
+  "ConnectionStrings": {
+    "SqlServerConnection": "TU_CADENA_DE_CONEXION_AQUI"
+  },
+  "JwtSettings": {
+    "Issuer": "EventosAPI",
+    "Audience": "EventosClient",
+    "SecretKey": "TU_CLAVE_SECRETA_DE_32_CARACTERES_MINIMO"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
