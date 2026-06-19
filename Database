@@ -1,0 +1,652 @@
+CREATE DATABASE Eventos;
+Use Eventos;
+
+--------------------Tablas------------------------------
+
+CREATE TABLE TIPO_EVENTO (
+    TIPOEVEN_ID INT IDENTITY(1,1) PRIMARY KEY,
+    NOMBRE VARCHAR(30) NOT NULL UNIQUE,
+   ESTADO VARCHAR(10) NOT NULL
+CHECK (ESTADO IN ('ACTIVO','INACTIVO'))
+);
+
+CREATE TABLE CIUDAD (
+    CIUDAD_ID INT IDENTITY(1,1) PRIMARY KEY,
+    CIUDAD_NOMBRE VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE VENUE (
+    VENUE_ID INT IDENTITY(1,1) PRIMARY KEY,
+
+    NOMBRE VARCHAR(100) NOT NULL,
+
+    CAPACIDAD INT NOT NULL,
+
+    CIUDAD_ID INT NOT NULL,
+
+    ESTADO VARCHAR(10) NOT NULL
+CHECK (ESTADO IN ('ACTIVO','INACTIVO')),
+
+    CONSTRAINT CK_VENUE_CAPACIDAD
+        CHECK (CAPACIDAD > 0),
+
+    CONSTRAINT FK_VENUE_CIUDAD
+        FOREIGN KEY (CIUDAD_ID)
+        REFERENCES CIUDAD(CIUDAD_ID)
+);
+
+CREATE TABLE CLIENTE (
+    CLIENTE_ID INT IDENTITY(1,1) PRIMARY KEY,
+    NOMBRE VARCHAR(150) NOT NULL,
+    EMAIL VARCHAR(200) NOT NULL UNIQUE,
+    FECHA DATETIME NOT NULL
+);
+
+
+CREATE TABLE EVENTO (
+    EVENTO_ID INT IDENTITY(1,1) PRIMARY KEY,
+
+    TITULO VARCHAR(100) NOT NULL,
+    DESCRIPCION VARCHAR(500) NOT NULL,
+
+    VENUE_ID INT NOT NULL,
+    TIPO_EVENTO_ID INT NOT NULL,
+
+    CAPACIDAD_MAXIMA INT NOT NULL,
+
+    FECHA_INICIO DATETIME NOT NULL,
+    FECHA_FIN DATETIME NOT NULL,
+
+    PRECIO_ENTRADA DECIMAL(12,2) NOT NULL,
+
+   ESTADO VARCHAR(10) NOT NULL,
+
+    CONSTRAINT FK_EVENTO_VENUE
+        FOREIGN KEY (VENUE_ID)
+        REFERENCES VENUE(VENUE_ID),
+
+    CONSTRAINT FK_EVENTO_TIPO
+        FOREIGN KEY (TIPO_EVENTO_ID)
+        REFERENCES TIPO_EVENTO(TIPOEVEN_ID),
+
+    CONSTRAINT CK_EVENTO_FECHAS
+        CHECK (FECHA_FIN > FECHA_INICIO),
+
+    CONSTRAINT CK_EVENTO_CAPACIDAD
+        CHECK (CAPACIDAD_MAXIMA > 0),
+
+    CONSTRAINT CK_EVENTO_PRECIO
+        CHECK (PRECIO_ENTRADA > 0),
+
+    CONSTRAINT CK_EVENTO_ESTADO
+        CHECK (ESTADO IN ('ACTIVO','CANCELADO','COMPLETADO'))
+);
+
+CREATE TABLE RESERVA (
+    RESERVA_ID INT IDENTITY(1,1) PRIMARY KEY,
+
+    EVENTO_ID INT NOT NULL,
+    CLIENTE_ID INT NOT NULL,
+
+    CANTIDAD INT NOT NULL,
+
+    ESTADO VARCHAR(20) NOT NULL DEFAULT 'PENDIENTE_PAGO',
+
+    CODIGO_RESERVA VARCHAR(20) UNIQUE NULL,
+
+    FECHA_RESERVA DATETIME DEFAULT SYSDATETIME(),
+    FECHA_CONFIRMACION DATETIME NULL,
+    FECHA_CANCELACION DATETIME NULL,
+
+    CONSTRAINT FK_RESERVA_EVENTO
+        FOREIGN KEY (EVENTO_ID)
+        REFERENCES EVENTO(EVENTO_ID),
+
+    CONSTRAINT FK_RESERVA_CLIENTE
+        FOREIGN KEY (CLIENTE_ID)
+        REFERENCES CLIENTE(CLIENTE_ID),
+
+    CONSTRAINT CK_RESERVA_CANTIDAD
+        CHECK (CANTIDAD > 0),
+
+    CONSTRAINT CK_RESERVA_ESTADO
+        CHECK (
+            ESTADO IN (
+                'PENDIENTE_PAGO',
+                'CONFIRMADA',
+                'CANCELADA',
+                'PERDIDA'
+            )
+        )
+);
+
+CREATE TABLE PAGO (
+    PAGO_ID INT IDENTITY(1,1) PRIMARY KEY,
+
+    RESERVA_ID INT NOT NULL,
+
+    VALOR DECIMAL(12,2) NOT NULL,
+
+    FECHA_PAGO DATETIME DEFAULT GETDATE(),
+
+    ESTADO VARCHAR(20) NOT NULL,
+
+    REFERENCIA VARCHAR(100),
+
+    CONSTRAINT FK_PAGO_RESERVA
+        FOREIGN KEY (RESERVA_ID)
+        REFERENCES RESERVA(RESERVA_ID),
+
+    CONSTRAINT CK_PAGO_VALOR
+        CHECK (VALOR > 0),
+
+    CONSTRAINT CK_PAGO_ESTADO
+        CHECK (ESTADO IN ('PENDIENTE','APROBADO','RECHAZADO'))
+);
+
+--------------------Fin Tablas------------------------------
+
+----------------Indices---------------------------
+CREATE INDEX IX_EVENTO_VENUE
+ON EVENTO(VENUE_ID);
+
+CREATE INDEX IX_EVENTO_TIPO
+ON EVENTO(TIPO_EVENTO_ID);
+
+CREATE INDEX IX_EVENTO_FECHA
+ON EVENTO(FECHA_INICIO);
+
+CREATE INDEX IX_RESERVA_EVENTO
+ON RESERVA(EVENTO_ID);
+
+CREATE INDEX IX_RESERVA_CLIENTE
+ON RESERVA(CLIENTE_ID);
+
+CREATE INDEX IX_RESERVA_ESTADO
+ON RESERVA(ESTADO);
+
+CREATE INDEX IX_PAGO_RESERVA
+ON PAGO(RESERVA_ID);
+
+CREATE INDEX IX_EVENTO_ESTADO
+ON EVENTO(ESTADO);
+
+-----------------------------------------
+
+
+---------------------Fin Indices-----------------------
+--------------------Datos------------------------------
+
+INSERT INTO CIUDAD (CIUDAD_NOMBRE)
+VALUES ('Bogotá');
+
+INSERT INTO CIUDAD (CIUDAD_NOMBRE)
+VALUES ('Medellín');
+
+INSERT INTO VENUE (
+    NOMBRE,
+    CAPACIDAD,
+    CIUDAD_ID,
+    ESTADO
+)
+VALUES (
+    'Auditorio Central',
+    200,
+    1, 'Activo'
+);
+
+INSERT INTO VENUE (
+    NOMBRE,
+    CAPACIDAD,
+    CIUDAD_ID,ESTADO
+)
+VALUES (
+    'Sala Norte',
+    50,
+    1, 'Activo'
+);
+
+INSERT INTO VENUE (
+    NOMBRE,
+    CAPACIDAD,
+    CIUDAD_ID,ESTADO
+)
+VALUES (
+    'Arena Sur',
+    500,
+    2, 'Activo'
+);
+
+
+INSERT INTO TIPO_EVENTO  (
+    NOMBRE,
+    ESTADO
+)
+VALUES (
+    'Conferencia', 'Activo'
+);
+
+INSERT INTO TIPO_EVENTO  (
+    NOMBRE,
+    ESTADO
+)
+VALUES (
+    'Taller', 'Activo'
+);
+
+INSERT INTO TIPO_EVENTO  (
+    NOMBRE,
+    ESTADO
+)
+VALUES (
+    'Concierto', 'Activo'
+);
+--------------------Fin Datos------------------------------
+
+----------------------Trigger--------------------------------
+CREATE TRIGGER TRG_EVENTO_NO_SOLAPAMIENTO
+ON EVENTO
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM EVENTO E
+        INNER JOIN inserted I
+            ON E.VENUE_ID = I.VENUE_ID
+           AND E.EVENTO_ID <> I.EVENTO_ID
+           AND (
+                I.FECHA_INICIO < E.FECHA_FIN
+                AND I.FECHA_FIN > E.FECHA_INICIO
+           )
+           AND E.ESTADO = 'ACTIVO'
+    )
+    BEGIN
+        RAISERROR ('Conflicto de horario: el venue ya tiene un evento en ese rango.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+END;
+----------------------Fin Trigger--------------------------------
+
+------------------------Procedimientos-------------------------------
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER PROCEDURE [dbo].[PR_CREAR_RESERVA]
+@EVENTO_ID INT, @NOMBRE VARCHAR (150), @EMAIL VARCHAR (200), @CANTIDAD INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        DECLARE @CLIENTE_ID AS INT;
+        DECLARE @CAPACIDAD AS INT;
+        DECLARE @VENDIDAS AS INT;
+        DECLARE @FECHA_INICIO AS DATETIME;
+        DECLARE @PRECIO AS DECIMAL (12, 2);
+        BEGIN TRANSACTION;
+        SELECT @CLIENTE_ID = CLIENTE_ID
+        FROM   CLIENTE WITH (UPDLOCK)
+        WHERE  EMAIL = @EMAIL;
+        IF @CLIENTE_ID IS NULL
+            BEGIN
+                INSERT  INTO CLIENTE (NOMBRE, EMAIL)
+                VALUES              (@NOMBRE, @EMAIL);
+                SET @CLIENTE_ID = SCOPE_IDENTITY();
+            END
+        ELSE
+            BEGIN
+                UPDATE CLIENTE
+                SET    NOMBRE = @NOMBRE,
+                       FECHA  = GETDATE()
+                WHERE  CLIENTE_ID = @CLIENTE_ID;
+            END
+        SELECT @CAPACIDAD = CAPACIDAD_MAXIMA,
+               @FECHA_INICIO = FECHA_INICIO,
+               @PRECIO = PRECIO_ENTRADA
+        FROM   EVENTO WITH (UPDLOCK, ROWLOCK)
+        WHERE  EVENTO_ID = @EVENTO_ID;
+        IF @CAPACIDAD IS NULL
+            BEGIN
+                ROLLBACK;
+                RAISERROR ('El evento no existe', 16, 1);
+                RETURN;
+            END
+        IF @CANTIDAD < 1
+            BEGIN
+                ROLLBACK;
+                RAISERROR ('La cantidad debe ser mayor a cero', 16, 1);
+                RETURN;
+            END
+        IF DATEDIFF(HOUR, GETDATE(), @FECHA_INICIO) < 24
+           AND @CANTIDAD > 5
+            BEGIN
+                ROLLBACK;
+                RAISERROR ('Máximo 5 entradas cuando faltan menos de 24 horas para el evento', 16, 1);
+                RETURN;
+            END
+        SELECT @VENDIDAS = ISNULL(SUM(CANTIDAD), 0)
+        FROM   RESERVA WITH (UPDLOCK)
+        WHERE  EVENTO_ID = @EVENTO_ID
+               AND ESTADO IN ('CONFIRMADA', 'PENDIENTE_PAGO');
+        IF DATEDIFF(MINUTE, GETDATE(), @FECHA_INICIO) < 60
+            BEGIN
+                ROLLBACK;
+                RAISERROR ('No se permiten reservas con menos de 1 hora de anticipacion', 16, 1);
+                RETURN;
+            END
+        IF @PRECIO > 100
+           AND @CANTIDAD > 10
+            BEGIN
+                ROLLBACK;
+                RAISERROR ('Máximo 10 entradas por transaccion para eventos > 100', 16, 1);
+                RETURN;
+            END
+        IF (@VENDIDAS + @CANTIDAD) > @CAPACIDAD
+            BEGIN
+                ROLLBACK;
+                RAISERROR ('No hay suficientes cupos disponibles', 16, 1);
+                RETURN;
+            END
+        INSERT  INTO RESERVA (EVENTO_ID, CLIENTE_ID, CANTIDAD, ESTADO)
+        VALUES              (@EVENTO_ID, @CLIENTE_ID, @CANTIDAD, 'PENDIENTE_PAGO');
+        COMMIT TRANSACTION;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK;
+        THROW;
+    END CATCH
+END
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER PROCEDURE [dbo].[PR_CREAR_EVENTO]
+@TITULO VARCHAR (100), @DESCRIPCION VARCHAR (500), @VENUE_ID INT, @TIPO_EVENTO_ID INT, @CAPACIDAD_MAXIMA INT, @FECHA_INICIO DATETIME, @FECHA_FIN DATETIME, @PRECIO_ENTRADA DECIMAL (12, 2)
+AS
+BEGIN
+    DECLARE @CAPACIDAD_VENUE AS INT;
+    BEGIN TRANSACTION;
+    IF @FECHA_FIN <= @FECHA_INICIO
+        BEGIN
+            ROLLBACK;
+            RAISERROR ('La fecha fin debe ser mayor a la fecha inicio', 16, 1);
+            RETURN;
+        END
+    SELECT @CAPACIDAD_VENUE = CAPACIDAD
+    FROM   VENUE
+    WHERE  VENUE_ID = @VENUE_ID;
+    IF @CAPACIDAD_VENUE IS NULL
+        BEGIN
+            ROLLBACK;
+            RAISERROR ('Venue no existe', 16, 1);
+            RETURN;
+        END
+    IF @CAPACIDAD_MAXIMA > @CAPACIDAD_VENUE
+        BEGIN
+            ROLLBACK;
+            RAISERROR ('Capacidad del evento excede la del venue', 16, 1);
+            RETURN;
+        END
+    IF DATENAME(WEEKDAY, @FECHA_INICIO) IN ('Saturday', 'Sunday')
+       AND CAST (@FECHA_INICIO AS TIME) > '22:00'
+        BEGIN
+            ROLLBACK;
+            RAISERROR ('Eventos en fin de semana no pueden iniciar despues de las 22:00', 16, 1);
+            RETURN;
+        END
+    INSERT  INTO EVENTO (TITULO, DESCRIPCION, VENUE_ID, TIPO_EVENTO_ID, CAPACIDAD_MAXIMA, FECHA_INICIO, FECHA_FIN, PRECIO_ENTRADA, ESTADO)
+    VALUES             (@TITULO, @DESCRIPCION, @VENUE_ID, @TIPO_EVENTO_ID, @CAPACIDAD_MAXIMA, @FECHA_INICIO, @FECHA_FIN, @PRECIO_ENTRADA, 'ACTIVO');
+    COMMIT TRANSACTION;
+END
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER PROCEDURE [dbo].[PR_CONFIRMAR_PAGO]
+@RESERVA_ID INT
+AS
+BEGIN
+    DECLARE @ESTADO AS VARCHAR (20);
+    BEGIN TRANSACTION;
+    SELECT @ESTADO = ESTADO
+    FROM   RESERVA WITH (UPDLOCK)
+    WHERE  RESERVA_ID = @RESERVA_ID;
+    IF @ESTADO = 'CONFIRMADA'
+        BEGIN
+            ROLLBACK;
+            RAISERROR ('La reserva ya esta confirmada', 16, 1);
+            RETURN;
+        END
+    IF @ESTADO = 'CANCELADA'
+        BEGIN
+            ROLLBACK;
+            RAISERROR ('No se puede confirmar una reserva cancelada', 16, 1);
+            RETURN;
+        END
+    UPDATE RESERVA
+    SET    ESTADO             = 'CONFIRMADA',
+           FECHA_CONFIRMACION = GETDATE(),
+           CODIGO_RESERVA     = CONCAT('EV-', RIGHT('000000' + CAST (@RESERVA_ID AS VARCHAR), 6))
+    WHERE  RESERVA_ID = @RESERVA_ID;
+    COMMIT TRANSACTION;
+END
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER PROCEDURE [dbo].[PR_CANCELAR_RESERVA]
+@RESERVA_ID INT
+AS
+BEGIN
+    DECLARE @FECHA_INICIO AS DATETIME;
+    DECLARE @HORAS AS INT;
+    DECLARE @ESTADO AS VARCHAR (20);
+    BEGIN TRANSACTION;
+    SELECT @FECHA_INICIO = E.FECHA_INICIO,
+           @ESTADO = R.ESTADO
+    FROM   RESERVA AS R
+           INNER JOIN
+           EVENTO AS E
+           ON E.EVENTO_ID = R.EVENTO_ID
+    WHERE  R.RESERVA_ID = @RESERVA_ID;
+    IF @ESTADO = 'CANCELADA'
+        BEGIN
+            ROLLBACK;
+            RAISERROR ('Ya esta cancelada', 16, 1);
+            RETURN;
+        END
+    SET @HORAS = DATEDIFF(HOUR, GETDATE(), @FECHA_INICIO);
+    IF @HORAS < 48
+        BEGIN
+            UPDATE RESERVA
+            SET    ESTADO            = 'PERDIDA',
+                   FECHA_CANCELACION = GETDATE()
+            WHERE  RESERVA_ID = @RESERVA_ID;
+        END
+    ELSE
+        BEGIN
+            UPDATE RESERVA
+            SET    ESTADO            = 'CANCELADA',
+                   FECHA_CANCELACION = GETDATE()
+            WHERE  RESERVA_ID = @RESERVA_ID;
+        END
+    COMMIT TRANSACTION;
+END
+
+
+
+------------------------Fin Procedimientos-------------------------------
+------------------------ Funciones -------------------------------
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER FUNCTION [dbo].[FN_LISTAR_EVENTOS]
+( )
+RETURNS TABLE 
+AS
+RETURN 
+    (SELECT E.EVENTO_ID AS EventoID,
+            E.TITULO AS Titulo,
+            E.DESCRIPCION AS Descripcion,
+            E.FECHA_INICIO AS FechaInicio,
+            E.FECHA_FIN AS FechaFin,
+            E.PRECIO_ENTRADA AS PrecioEntrada,
+            E.ESTADO AS Estado,
+            V.NOMBRE AS Venue,
+            E.CAPACIDAD_MAXIMA AS Capacidad,
+            C.CIUDAD_NOMBRE AS CiudadNombre,
+            T.NOMBRE AS TipoEvento
+     FROM   EVENTO AS E
+            INNER JOIN
+            VENUE AS V
+            ON V.VENUE_ID = E.VENUE_ID
+            INNER JOIN
+            CIUDAD AS C
+            ON C.CIUDAD_ID = V.CIUDAD_ID
+            INNER JOIN
+            TIPO_EVENTO AS T
+            ON T.TIPOEVEN_ID = E.TIPO_EVENTO_ID)
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER   FUNCTION [dbo].[FN_LISTAR_EVENTOS_ID]
+(@EVENTO_ID INT)
+RETURNS TABLE 
+AS
+RETURN 
+    (SELECT E.EVENTO_ID,
+            E.TITULO AS Titulo,
+            E.DESCRIPCION AS Descripcion,
+            E.FECHA_INICIO AS FechaInicio,
+            E.FECHA_FIN AS FechaFin,
+            E.PRECIO_ENTRADA AS PrecioEntrada,
+            E.ESTADO AS Estado,
+            V.NOMBRE AS Venue,
+            E.CAPACIDAD_MAXIMA AS Capacidad,
+            C.CIUDAD_NOMBRE AS CiudadNombre,
+            T.NOMBRE AS TipoEvento
+     FROM   EVENTO AS E
+            INNER JOIN
+            VENUE AS V
+            ON V.VENUE_ID = E.VENUE_ID
+            INNER JOIN
+            CIUDAD AS C
+            ON C.CIUDAD_ID = V.CIUDAD_ID
+            INNER JOIN
+            TIPO_EVENTO AS T
+            ON T.TIPOEVEN_ID = E.TIPO_EVENTO_ID
+     WHERE  E.EVENTO_ID = @EVENTO_ID)
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER FUNCTION [dbo].[FN_LISTAR_RESERVAS]
+(@EVENTO_ID INT)
+RETURNS TABLE 
+AS
+RETURN 
+    (SELECT C.NOMBRE AS Nombre,
+            C.EMAIL AS Email,
+            R.CANTIDAD AS Cantidad,
+            R.ESTADO AS Estado,
+            R.FECHA_RESERVA AS FechaReserva,
+            R.RESERVA_ID AS reservaId
+     FROM   EVENTO AS E
+            INNER JOIN
+            RESERVA AS R
+            ON R.EVENTO_ID = E.EVENTO_ID
+            INNER JOIN
+            CLIENTE AS C
+            ON C.CLIENTE_ID = R.CLIENTE_ID
+     WHERE  E.EVENTO_ID = @EVENTO_ID)
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER FUNCTION [dbo].[FN_LISTAR_TIPOS_EVENTO]
+( )
+RETURNS TABLE 
+AS
+RETURN 
+    (SELECT TIPOEVEN_ID AS TipoEvenId,
+            NOMBRE AS Nombre,
+            ESTADO AS Estado
+     FROM   TIPO_EVENTO)
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER FUNCTION [dbo].[FN_LISTAR_VENUES]
+( )
+RETURNS TABLE 
+AS
+RETURN 
+    (SELECT V.VENUE_ID AS VenueId,
+            V.NOMBRE AS Nombre,
+            V.CAPACIDAD AS Capacidad,
+            V.ESTADO AS Estado,
+            C.CIUDAD_ID AS CiudadId,
+            C.CIUDAD_NOMBRE AS CiudadNombre
+     FROM   VENUE AS V
+            INNER JOIN
+            CIUDAD AS C
+            ON C.CIUDAD_ID = V.CIUDAD_ID)
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE OR ALTER   FUNCTION [dbo].[FN_REPORTAR_OCUPACION]
+( )
+RETURNS TABLE 
+AS
+RETURN 
+    (SELECT   E.TITULO AS Evento,
+              E.CAPACIDAD_MAXIMA AS CapacidadTotal,
+              ISNULL(SUM(CASE WHEN R.ESTADO = 'CONFIRMADA' THEN R.CANTIDAD ELSE 0 END), 0) AS EntradasVendidas,
+              E.CAPACIDAD_MAXIMA - ISNULL(SUM(CASE WHEN R.ESTADO = 'CONFIRMADA' THEN R.CANTIDAD ELSE 0 END), 0) AS EntradasDisponibles,
+              ROUND((CAST (ISNULL(SUM(CASE WHEN R.ESTADO = 'CONFIRMADA' THEN R.CANTIDAD ELSE 0 END), 0) AS DECIMAL (18, 2)) / NULLIF (E.CAPACIDAD_MAXIMA, 0)) * 100, 2) AS PorcentajeOcupacion,
+              ISNULL(SUM(CASE WHEN R.ESTADO = 'CONFIRMADA' THEN R.CANTIDAD ELSE 0 END), 0) * E.PRECIO_ENTRADA AS TotalIngresos,
+              E.ESTADO AS EstadoEvento
+     FROM     EVENTO AS E
+              LEFT OUTER JOIN
+              RESERVA AS R
+              ON E.EVENTO_ID = R.EVENTO_ID
+     GROUP BY E.EVENTO_ID, E.TITULO, E.CAPACIDAD_MAXIMA, E.PRECIO_ENTRADA, E.ESTADO)
+
+
+
+
+------------------------ Fin Funciones -------------------------------
