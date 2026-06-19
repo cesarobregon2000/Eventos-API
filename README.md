@@ -8,10 +8,10 @@ Esta API constituye el núcleo del sistema "Eventos Vivos", diseñada para gesti
 - **Justificación:** Se eligió esta arquitectura para garantizar un desacoplamiento total entre la lógica de negocio (Core), la persistencia (Infraestructura) y la interfaz (API). [cite_start]Esto permite que el núcleo del negocio sea testeable de forma aislada y altamente resistente a cambios tecnológicos[cite: 69, 81].
 
 ## Tecnologías
-- [cite_start]**Lenguaje:** C# / .NET Core 8.0 [cite: 89, 90]
-- [cite_start]**Patrones:** CQRS, MediatR, Inyección de Dependencias [cite: 73, 78, 95]
-- [cite_start]**Persistencia:** SQL Server, Entity Framework Core, Dapper [cite: 93, 94, 100]
-- [cite_start]**Validaciones:** FluentValidation [cite: 96]
+**Lenguaje:** C# / .NET Core 8.0 [cite: 89, 90]
+**Patrones:** CQRS, MediatR, Inyección de Dependencias [cite: 73, 78, 95]
+*Persistencia:** SQL Server, Entity Framework Core, Dapper [cite: 93, 94, 100]
+**Validaciones:** FluentValidation [cite: 96]
 
 ## Instrucciones de ejecución
 1. Asegúrate de tener instalado el .NET SDK 8.0.
