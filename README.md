@@ -31,6 +31,12 @@ Cancelar Reserva
 ## Estructura del módulo.
 Se organizó mediante una arquitectura de proyectos (API, Application, Domain, Infrastructure) asegurando la separación de responsabilidades.
 
+## Base de Datos
+El script de creación de la base de datos se encuentra en la carpeta denomina Database.
+Para ejecutarlo:
+1. Abre SQL Server Management Studio (SSMS).
+2. Crea una consulta vacía.
+3. Pega el contenido de Schema.sql y ejecútalo. Esto creará automáticamente la base de datos Eventos y todos sus objetos.
 
 ## Instrucciones de ejecución
 1. Asegúrate de tener instalado el .NET SDK 8.0.
